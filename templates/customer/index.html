@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div>
+    <h1>Customer List</h1>
+</div>
+<div>
+    <button id="mybutton">Fetch</button>
+</div>
+<div>
+    <ul id="customers">
+    </ul>
+</div>
+
+<script>
+    var button = document.getElementById("mybutton");
+    var customers = document.getElementById("customers");
+    
+
+    button.addEventListener("click",()=>{
+        customers.innerText = ""
+        fetch("get/")
+            .then((response) => response.json())
+            .then((data) => data.forEach((customer)=>{
+                customers.insertAdjacentHTML("beforeend","<li>" + customer.firstname + "</li>")
+            })
+        )
+    })
+    
+</script>
+
+{% endblock %}
